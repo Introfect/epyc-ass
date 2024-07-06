@@ -7,7 +7,7 @@ function BarCharts({data}: any) {
   return (
     <ResponsiveContainer width="100%" minHeight={300}>
         <BarChart 
-        data={data}
+      data={data && data}
         margin={{
             top: 5,
             right: 30,
@@ -20,7 +20,7 @@ function BarCharts({data}: any) {
           <YAxis />
           <Tooltip />
           <Legend />
-          <Bar dataKey="matches" fill="#7540A9" />
+          <Bar dataKey="matches" fill="#8377d0" radius={[10, 10, 0, 0]}/>
         </BarChart>
     </ResponsiveContainer>
   )

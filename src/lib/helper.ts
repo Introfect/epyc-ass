@@ -1,4 +1,5 @@
-import { MatchType, MetricComparison, TeamPerformance, YearlyMetric } from "@/types/matchesTypes";
+import { MatchType, MetricComparison, TeamPerformance, TeamStats, YearlyMetric } from "@/types/matchesTypes";
+import { PlayerRecord } from "@/types/playerTypes";
 
 export const normalizeSeason = (season: string) => {
     const newString=String(season)
@@ -273,5 +274,171 @@ export const calculateYearlyWickets = (matches: MatchType[], teamA: string, team
     teamA: yearlyStats[year][teamA],
     teamB: yearlyStats[year][teamB],
   }));
+};
+
+export const calculateTeamStats = (matches: MatchType[]): TeamStats[] => {
+  const teamStats: { [team: string]: { wins: number, losses: number, matchesPlayed: number, totalRuns: number } } = {};
+
+  matches.forEach(match => {
+    const { team1, team2, winner, target_runs } = match;
+
+    if (!teamStats[team1]) {
+      teamStats[team1] = { wins: 0, losses: 0, matchesPlayed: 0, totalRuns: 0 };
+    }
+
+    if (!teamStats[team2]) {
+      teamStats[team2] = { wins: 0, losses: 0, matchesPlayed: 0, totalRuns: 0 };
+    }
+
+    teamStats[team1].matchesPlayed++;
+    teamStats[team2].matchesPlayed++;
+
+    teamStats[team1].totalRuns += target_runs;
+    teamStats[team2].totalRuns += target_runs;
+
+    if (winner === team1) {
+      teamStats[team1].wins++;
+      teamStats[team2].losses++;
+    } else if (winner === team2) {
+      teamStats[team2].wins++;
+      teamStats[team1].losses++;
+    }
+  });
+
+  return Object.entries(teamStats).map(([team, stats]) => ({
+    team,
+    wins: stats.wins,
+    losses: stats.losses,
+    matchesPlayed: stats.matchesPlayed,
+    totalRuns: stats.totalRuns,
+    avgRunsPerMatch: stats.matchesPlayed > 0 ? stats.totalRuns / stats.matchesPlayed : 0,
+  })).sort((a, b) => b.wins - a.wins).slice(0, 5);
+};
+
+// Player analysis
+
+export const compareBattingAverage = (records: PlayerRecord[], player1: string, player2: string): { year: number, player1: number, player2: number }[] => {
+  const yearlyStats: { [year: number]: { [player: string]: number } } = {};
+
+  records.forEach(record => {
+    const year = record.year;
+
+    if (!yearlyStats[year]) {
+      yearlyStats[year] = {};
+    }
+
+    if (record.player_name === player1) {
+      yearlyStats[year][player1] = record.batting_average;
+    }
+
+    if (record.player_name === player2) {
+      yearlyStats[year][player2] = record.batting_average;
+    }
+  });
+
+  return Object.keys(yearlyStats).map(year => ({
+    year: parseInt(year),
+    // @ts-expect-error
+    player1: yearlyStats[year][player1] || 0,
+    // @ts-expect-error
+    player2: yearlyStats[year][player2] || 0,
+  }));
+};
+
+
+export const compareRunsScored = (records: PlayerRecord[], player1: string, player2: string): { year: number, player1: number, player2: number }[] => {
+  const yearlyStats: { [year: number]: { [player: string]: number } } = {};
+
+  records.forEach(record => {
+    const year = record.year;
+
+    if (!yearlyStats[year]) {
+      yearlyStats[year] = {};
+    }
+
+    if (record.player_name === player1) {
+      yearlyStats[year][player1] = record.runs_scored;
+    }
+
+    if (record.player_name === player2) {
+      yearlyStats[year][player2] = record.runs_scored;
+    }
+  });
+
+  return Object.keys(yearlyStats).map(year => ({
+    year: parseInt(year),
+    // @ts-expect-error
+    player1: yearlyStats[year][player1] || 0,
+    // @ts-expect-error
+    player2: yearlyStats[year][player2] || 0,
+  }));
+};
+
+
+const compareWicketsTaken = (records: PlayerRecord[], player1: string, player2: string): { year: number, player1: number, player2: number }[] => {
+  const yearlyStats: { [year: number]: { [player: string]: number } } = {};
+
+  records.forEach(record => {
+    const year = record.year;
+
+    if (!yearlyStats[year]) {
+      yearlyStats[year] = {};
+    }
+
+    if (record.player_name === player1) {
+      yearlyStats[year][player1] = record.wickets_taken;
+    }
+
+    if (record.player_name === player2) {
+      yearlyStats[year][player2] = record.wickets_taken;
+    }
+  });
+
+  return Object.keys(yearlyStats).map(year => ({
+    year: parseInt(year),
+    // @ts-expect-error
+    player1: yearlyStats[year][player1] || 0,
+    // @ts-expect-error
+    player2: yearlyStats[year][player2] || 0,
+  }));
+};
+
+
+const compareBattingStrikeRate = (records: PlayerRecord[], player1: string, player2: string): { year: number, player1: number, player2: number }[] => {
+  const yearlyStats: { [year: number]: { [player: string]: number } } = {};
+
+  records.forEach(record => {
+    const year = record.year;
+
+    if (!yearlyStats[year]) {
+      yearlyStats[year] = {};
+    }
+
+    if (record.player_name === player1) {
+      yearlyStats[year][player1] = record.batting_strike_rate;
+    }
+
+    if (record.player_name === player2) {
+      yearlyStats[year][player2] = record.batting_strike_rate;
+    }
+  });
+
+  return Object.keys(yearlyStats).map(year => ({
+    year: parseInt(year),
+    // @ts-expect-error
+    player1: yearlyStats[year][player1] || 0,
+    // @ts-expect-error
+    player2: yearlyStats[year][player2] || 0,
+  }));
+};
+
+export const getUniquePlayerNames = (records: PlayerRecord[]): string[] => {
+  const playerNamesSet: Set<string> = new Set();
+
+  records.forEach(record => {
+    playerNamesSet.add(record.player_name);
+  });
+
+  return Array.from(playerNamesSet);
 };
 

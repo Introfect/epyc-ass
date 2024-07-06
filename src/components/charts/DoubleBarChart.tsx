@@ -20,8 +20,8 @@ function DoubleBarChart({data}:any) {
       <YAxis />
       <Tooltip />
       <Legend />
-      <Bar dataKey="bat" fill="#7540A9" />
-      <Bar dataKey="bowl" fill="#1CCB5B" />
+      <Bar dataKey="bat" fill="#8377d0" radius={[5, 5, 0, 0]} />
+      <Bar dataKey="bowl" fill="#bfbaed" radius={[5, 5, 0, 0]} />
     </BarChart>
 </ResponsiveContainer>
   )

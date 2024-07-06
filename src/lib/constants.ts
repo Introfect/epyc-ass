@@ -9,7 +9,7 @@ import Workflows from '@/components/icons/workflows'
 export const menuOptions = [
     { name: 'Dashboard', Component: Home, href: '/dashboard' },
     { name: 'Workflows', Component: Workflows, href: '/dashboard/team' },
-    { name: 'Settings', Component: Settings, href: '/settings' },
+    { name: 'Settings', Component: Settings, href: '/dashboard/player' },
     { name: 'Connections', Component: Category, href: '/connections' },
     { name: 'Billing', Component: Payment, href: '/billing' },
     { name: 'Templates', Component: Templates, href: '/templates' },

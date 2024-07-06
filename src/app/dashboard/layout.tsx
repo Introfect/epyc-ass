@@ -1,4 +1,5 @@
 import Navbar from "@/components/Navbar"
+import { Toaster } from "@/components/ui/toaster"
 
 type Props = { children: React.ReactNode }
 
@@ -14,6 +15,7 @@ const Layout = (props: Props) => {
     </div>
         {props.children}
       </div>
+      <Toaster/>
     </div>
   )
 }

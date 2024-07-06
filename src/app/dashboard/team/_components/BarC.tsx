@@ -20,8 +20,8 @@ function BarC({data}: any) {
       <YAxis />
       <Tooltip />
       <Legend />
-      <Bar dataKey="teamA" fill="#7540A9" />
-      <Bar dataKey="teamB" fill="#1CCB5B" />
+      <Bar dataKey="teamA" fill="#8377d0 " radius={[10, 10, 0, 0]} />
+      <Bar dataKey="teamB" fill="#bfbaed" radius={[10, 10, 0, 0]}/>
     </BarChart>
 </ResponsiveContainer>
   )

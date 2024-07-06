@@ -1,7 +1,8 @@
 import { calculateAvgRunsPerSeason } from '@/lib/helper';
 import { MatchType } from '@/types/matchesTypes';
 import React, { useState } from 'react'
-import { ResponsiveContainer, BarChart, CartesianGrid, XAxis, YAxis, Tooltip, Legend, Bar } from 'recharts';
+import { ResponsiveContainer, BarChart, CartesianGrid, XAxis, YAxis, Tooltip, Legend, Bar, LineChart, Line, AreaChart, Area } from 'recharts';
+import { CardHeader, CardTitle, CardDescription, CardContent,Card } from './ui/card';
 
 type Props = {}
 
@@ -9,29 +10,36 @@ function DashboardHeader({dataM}: any) {
 
       const avgRunsPerSeason = calculateAvgRunsPerSeason(dataM);
   return (
-    <div className='flex justify-between w-full p-4 md:p-6'>
-        <div>
-            <h1>Here is an overview of the runs Score per match in different season</h1>
-        </div>
-        <div className='w-1/2'>
-        <ResponsiveContainer width="100%" minHeight={300}>
-        <BarChart 
-        data={avgRunsPerSeason}
-        margin={{
+    <div className='flex flex-col xl:flex-row items-center p-4 md:p-6 w-full xl:w-1/2'>  
+        <div className='w-full'>
+        <Card>
+          <CardHeader>
+            <CardTitle>Average runs per season</CardTitle>
+            <CardDescription>A detaild analysis of the average runs scored in each season per match</CardDescription>
+          </CardHeader>
+          <CardContent>
+                  <ResponsiveContainer width="100%" minHeight={400}>
+           <AreaChart
+          width={500}
+          height={400}
+          data={avgRunsPerSeason}
+          margin={{
             top: 5,
-            right: 30,
-            left: 20,
             bottom: 5,
           }}
-          >
-              <CartesianGrid strokeDasharray="3 3" />
+        >
+          <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="year" />
           <YAxis />
           <Tooltip />
           <Legend />
-          <Bar dataKey="avgRuns" fill="#7540A9" />
-        </BarChart>
+          <Area type="monotone" dataKey="avgRuns" fill="#AEAEE4" stroke="#000080" activeDot={{ r: 8 }} />
+        </AreaChart>
     </ResponsiveContainer>
+            
+          </CardContent>
+        </Card>
+  
         </div>
      
         

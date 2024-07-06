@@ -45,7 +45,7 @@ function TeamVTeam({}: Props) {
         yearlyWic && setYearlyWickets(yearlyWic)
     }
     return (
-        <div className='flex flex-col items-center mt-5 justify-around'>
+        <div className='flex flex-col items-center mt-5 justify-around '>
             <p className='text-2xl md:tetx-4xl font-bold antialiased'>Lets see a Team <span className='text-[#7540A9]'>VS</span> Team analysis</p>
             <div className='flex flex-col md:flex-row gap-4 my-4'>
             <div>
@@ -78,7 +78,9 @@ function TeamVTeam({}: Props) {
                 Get Results
             </Button>
             </div>
-            <div className="w-full grid grid-cols-1 gap-4 lg:grid-cols-2">
+            <div className='flex flex-col space-y-10 w-full '>
+
+            <div className="w-full grid grid-cols-1 gap-4 xl:grid-cols-2">
             <Card>
           <CardHeader>
             <CardTitle>Overall Comparison</CardTitle>
@@ -98,7 +100,7 @@ function TeamVTeam({}: Props) {
           </CardContent>
         </Card>
             </div>
-            <div className="w-full grid grid-cols-1 gap-4 lg:grid-cols-2">
+            <div className="w-full grid grid-cols-1 gap-4 xl:grid-cols-2">
             <Card>
           <CardHeader>
             <CardTitle>Team Wins</CardTitle>
@@ -110,13 +112,14 @@ function TeamVTeam({}: Props) {
         </Card>
         <Card>
           <CardHeader>
-            <CardTitle>Average runs</CardTitle>
+            <CardTitle>Team Wickets</CardTitle>
             <CardDescription>By each season</CardDescription>
           </CardHeader>
           <CardContent>
             <BarC data={yearlyWickets} />
           </CardContent>
         </Card>
+            </div>
             </div>
 
 

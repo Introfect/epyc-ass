@@ -1,13 +1,12 @@
-
 import React from 'react'
-import TeamVTeam from './_components/TeamVTeam';
+import PlaverVSPlaver from './_components/PlaverVSPlaver'
 
 type Props = {}
 
-function page({matches}: any) {
+function page({}: Props) {
   return (
     <div className='w-full h-screen overflow-auto px-4 py-2'>
-      <TeamVTeam/>
+      <PlaverVSPlaver/>
     </div>
   )
 }

@@ -11,8 +11,8 @@ function RadarC({data}: any) {
       <PolarGrid />
       <PolarAngleAxis dataKey="metric" />
       <PolarRadiusAxis />
-      <Radar name="Mike" dataKey='teamA' stroke="#8884d8" fill="#8884d8" fillOpacity={0.6} />
-      <Radar name="Lily" dataKey="teamB" stroke="#82ca9d" fill="#82ca9d" fillOpacity={0.6} />
+      <Radar name="Mike" dataKey='teamA' stroke="#8377d0" fill="#8377d0" fillOpacity={0.6} />
+      <Radar name="Lily" dataKey="teamB" stroke="#bfbaed" fill="#bfbaed" fillOpacity={0.7} />
     </RadarChart>
   </ResponsiveContainer>
   )

@@ -10,7 +10,7 @@ import { Button } from './ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
 import DoubleBarChart from './charts/DoubleBarChart';
 import DashboardHeader from './DashboardHeader';
-import { countMatchesPerSeason, countTossDecisionsPerTeam } from '@/lib/helper';
+import { calculateTeamStats, countMatchesPerSeason, countTossDecisionsPerTeam} from '@/lib/helper';
 
 const Dashboard= () => {
   const [matchData, setMatchData] = useState<MatchType[]>([])
@@ -24,18 +24,16 @@ const Dashboard= () => {
   }, []);
   const seasonCount = countMatchesPerSeason(matchData);
   const tossDecisions = countTossDecisionsPerTeam(matchData);
-  console.log(matchData)
+  const matchWins=calculateTeamStats(matchData)
+  console.log(matchWins)
   return (
     <main className="flex flex-col h-screen overflow-y-auto rounded">
       <div className='w-full flex flex-col ml-6 justify-center items-center'>
-        <h1 className=' text-4xl gap-6 tracking-wide antialiased font-light'>Welcome to your <span className='font-bold text-[#7540A9]'>Dashboard</span></h1>
-        <p className='py-1 text-sm font-semibold'>Here is an overview of the analysis, explore for detailed analysis</p>
+        <h1 className='text-xl md:text-4xl gap-6 tracking-wide antialiased font-light'>Welcome to your <span className='font-bold text-[#7540A9]'>Dashboard</span></h1>
       </div>
-      <DashboardHeader dataM={matchData}/>
-
-    <div className="grid flex-1 gap-4 p-4 md:gap-8 md:p-6">
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-        <Card>
+      <div className='flex flex-col xl:flex-row w-full justify-around items-center'>
+      {/* <div className="grid grid-cols-1 gap-x-12 gap-y-6 sm:grid-cols-2 max-w-max">
+        <Card className=''>
           <CardHeader>
             <CardTitle>Total Revenue</CardTitle>
             <CardDescription>Last 30 days</CardDescription>
@@ -47,7 +45,7 @@ const Dashboard= () => {
         </Card>
         <Card>
           <CardHeader>
-            <CardTitle>New Customers</CardTitle>
+            <CardTitle>New Players</CardTitle>
             <CardDescription>Last 30 days</CardDescription>
           </CardHeader>
           <CardContent>
@@ -75,7 +73,45 @@ const Dashboard= () => {
             <div className="text-sm text-muted-foreground">+$5 from previous period</div>
           </CardContent>
         </Card>
+      </div> */}
+
+
+<div className="overflow-x-auto w-full xl:w-1/2 px-4">
+  <table className="min-w-full divide-y-2 divide-gray-200 bg-white text-sm">
+    <thead className="ltr:text-left rtl:text-right">
+      <tr>
+        <th className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Team</th>
+        <th className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Wins</th>
+        <th className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Loss</th>
+        <th className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Average Runs per match</th>
+        <th className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Matches Played</th>
+      </tr>
+    </thead>
+
+    <tbody className="divide-y divide-gray-200">
+      {
+        matchWins && matchWins.map((item,index)=>{
+          return(
+
+      <tr key={index}>
+        <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">{item.team}</td>
+        <td className="whitespace-nowrap px-4 py-2 text-gray-700">{item.wins}</td>
+        <td className="whitespace-nowrap px-4 py-2 text-gray-700">{item.losses}</td>
+        <td className="whitespace-nowrap px-4 py-2 text-gray-700">{item.avgRunsPerMatch}</td>
+        <td className="whitespace-nowrap px-4 py-2 text-gray-700">{item.matchesPlayed}</td>
+      </tr>
+          )
+        })
+      }
+
+    </tbody>
+  </table>
+</div>
+
+      <DashboardHeader dataM={matchData}/>
       </div>
+
+    <div className="grid flex-1 gap-4 p-4 md:gap-8 md:p-6">
       <div className="grid grid-cols-1 gap-4 xl:grid-cols-2">
         <Card>
           <CardHeader>

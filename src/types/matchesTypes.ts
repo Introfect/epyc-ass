@@ -46,3 +46,12 @@ export type YearlyMetric= {
   teamA: number;
   teamB: number;
 }
+
+export type TeamStats= {
+  team: string;
+  wins: number;
+  losses: number;
+  matchesPlayed: number;
+  totalRuns: number;
+  avgRunsPerMatch: number;
+}
