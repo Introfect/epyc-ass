@@ -142,7 +142,9 @@ export const calculateMetricsComparison = (matches: MatchType[], teamA: string, 
       valueA = teamStats[teamA].matchesPlayed > 0 ? teamStats[teamA].totalRuns / teamStats[teamA].matchesPlayed : 0;
       valueB = teamStats[teamB].matchesPlayed > 0 ? teamStats[teamB].totalRuns / teamStats[teamB].matchesPlayed : 0;
     } else {
+      // @ts-ignore
       valueA = teamStats[teamA][metric as keyof typeof teamStats[teamA]];
+      // @ts-ignore
       valueB = teamStats[teamB][metric as keyof typeof teamStats[teamB]];
     }
     return {
