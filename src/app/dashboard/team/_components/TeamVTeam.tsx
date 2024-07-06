@@ -54,8 +54,8 @@ function TeamVTeam({}: Props) {
                         <SelectValue placeholder="Select the first theme" />
                     </SelectTrigger>
                     <SelectContent>
-                        {uniqueTeams?.map((item) => (
-                            <SelectItem value={item}>{item}</SelectItem>
+                        {uniqueTeams?.map((item,index) => (
+                            <SelectItem key={index} value={item}>{item}</SelectItem>
                         ))}
 
                     </SelectContent>
@@ -67,8 +67,8 @@ function TeamVTeam({}: Props) {
                         <SelectValue className='text-xs' placeholder="Select the second theme" />
                     </SelectTrigger>
                     <SelectContent>
-                        {uniqueTeams?.map((item) => (
-                            <SelectItem value={item}>{item}</SelectItem>
+                        {uniqueTeams?.map((item,index) => (
+                            <SelectItem key={index} value={item}>{item}</SelectItem>
                         ))}
 
                     </SelectContent>
