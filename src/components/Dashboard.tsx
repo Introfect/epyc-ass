@@ -162,8 +162,8 @@ const Dashboard= () => {
         </Card>
         <Card>
           <CardHeader>
-            <CardTitle>Sales by Channel</CardTitle>
-            <CardDescription>Last 30 days</CardDescription>
+            <CardTitle>Toss Desision By Teams</CardTitle>
+            <CardDescription>By Team</CardDescription>
           </CardHeader>
           <CardContent>
             <DoubleBarChart data={tossDecisions} />

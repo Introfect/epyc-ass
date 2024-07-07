@@ -55,7 +55,7 @@ function TeamVTeam({}: Props) {
         yearlyWic && setYearlyWickets(yearlyWic)
     }
     return (
-        <div className='flex flex-col items-center mt-5 justify-around '>
+        <div className='flex flex-col items-center mt-5 justify-around pb-20'>
             <p className='text-2xl md:tetx-4xl font-bold antialiased'>Lets see a Team <span className='text-[#7540A9]'>VS</span> Team analysis</p>
             <div className='flex flex-col md:flex-row gap-4 my-4'>
             <div>
