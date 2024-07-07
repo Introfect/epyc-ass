@@ -1,5 +1,5 @@
 import { MatchType, MetricComparison, TeamPerformance, TeamStats, YearlyMetric } from "@/types/matchesTypes";
-import { PlayerRecord } from "@/types/playerTypes";
+import { PlayerRecord, TopPlayer } from "@/types/playerTypes";
 
 export const normalizeSeason = (season: string) => {
     const newString=String(season)
@@ -293,8 +293,11 @@ export const calculateTeamStats = (matches: MatchType[]): TeamStats[] => {
     teamStats[team1].matchesPlayed++;
     teamStats[team2].matchesPlayed++;
 
-    teamStats[team1].totalRuns += target_runs;
-    teamStats[team2].totalRuns += target_runs;
+    const targetRunsTeam1 = typeof target_runs === 'number' ? target_runs : (isNaN(Number(target_runs)) ? 0 : Number(target_runs));
+    const targetRunsTeam2 = typeof target_runs === 'number' ? target_runs : (isNaN(Number(target_runs)) ? 0 : Number(target_runs));
+
+    teamStats[team1].totalRuns += targetRunsTeam1;
+    teamStats[team2].totalRuns += targetRunsTeam2;
 
     if (winner === team1) {
       teamStats[team1].wins++;
@@ -313,6 +316,24 @@ export const calculateTeamStats = (matches: MatchType[]): TeamStats[] => {
     totalRuns: stats.totalRuns,
     avgRunsPerMatch: stats.matchesPlayed > 0 ? stats.totalRuns / stats.matchesPlayed : 0,
   })).sort((a, b) => b.wins - a.wins).slice(0, 5);
+};
+
+
+export const countMatchesAndSuperOvers = (matches: MatchType[]) => {
+  let totalMatches = 0;
+  let superOvers = 0;
+
+  matches.forEach(match => {
+    totalMatches++;
+    if (match.super_over?.toLowerCase() === 'y') {
+      superOvers++;
+    }
+  });
+
+  return {
+    totalMatches,
+    superOvers
+  };
 };
 
 // Player analysis
@@ -375,7 +396,7 @@ export const compareRunsScored = (records: PlayerRecord[], player1: string, play
 };
 
 
-const compareWicketsTaken = (records: PlayerRecord[], player1: string, player2: string): { year: number, player1: number, player2: number }[] => {
+export const compareWicketsTaken = (records: PlayerRecord[], player1: string, player2: string): { year: number, player1: number, player2: number }[] => {
   const yearlyStats: { [year: number]: { [player: string]: number } } = {};
 
   records.forEach(record => {
@@ -404,7 +425,7 @@ const compareWicketsTaken = (records: PlayerRecord[], player1: string, player2: 
 };
 
 
-const compareBattingStrikeRate = (records: PlayerRecord[], player1: string, player2: string): { year: number, player1: number, player2: number }[] => {
+export const compareBattingStrikeRate = (records: PlayerRecord[], player1: string, player2: string): { year: number, player1: number, player2: number }[] => {
   const yearlyStats: { [year: number]: { [player: string]: number } } = {};
 
   records.forEach(record => {
@@ -442,3 +463,19 @@ export const getUniquePlayerNames = (records: PlayerRecord[]): string[] => {
   return Array.from(playerNamesSet);
 };
 
+export const getTopRunScorers = (players: PlayerRecord[]): TopPlayer[] => {
+  // Sort players by runs scored in descending order
+  const sortedPlayers = players.sort((a, b) => b.runs_scored - a.runs_scored);
+
+  // Get the top 5 players
+  const topPlayers = sortedPlayers.slice(0, 5);
+
+  // Return the required metrics
+  return topPlayers.map(player => ({
+    player_name: player.player_name,
+    runs_scored: player.runs_scored,
+    highest_score: player.highest_score,
+    half_centuries: player.half_centuries,
+    centuries: player.centuries
+  }));
+};

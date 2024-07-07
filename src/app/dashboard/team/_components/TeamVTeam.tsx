@@ -14,10 +14,11 @@ import { Button } from '@/components/ui/button'
 import RadarC from './RadarC'
 import BarC from './BarC'
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card'
-
+import { useToast } from '@/components/ui/use-toast'
 type Props = {}
 
 function TeamVTeam({}: Props) {
+  const {toast}=useToast()
     const [inputOne,setInputOne]=useState('')
     const [inputTwo,setInputTwo]=useState('')
     const [p1, setP1] =useState<MetricComparison[]>([])
@@ -27,6 +28,7 @@ function TeamVTeam({}: Props) {
     const [yearlyWickets,setYearlyWickets]=useState<YearlyMetric[]>([])
     const [deliveriesData, setDeliveriesData] = useState<any[]>([])
     const { fetchCsvData } = useFetch();
+  
     useEffect(() => {
         fetchCsvData('/matches.csv', setMatchData)
         // fetchCsvData('/deliveries.csv', setDeliveriesData)
@@ -35,6 +37,14 @@ function TeamVTeam({}: Props) {
 
 
     const handleTeam=()=>{
+      if (!inputOne || !inputTwo) {
+        toast({
+          variant: "default",
+          title: "SELECT BOTH PLAYERS",
+          description:
+            "Select both players from dropdown to see a detailed analysis of both",
+        });
+      }
         const TeamOnePerformance=calculateMetricsComparison(matchData, inputOne,inputTwo);
         const avgRuns= calculateYearlyAvgRuns(matchData,inputOne,inputTwo)
         const yW=calculateYearlyWins(matchData,inputOne,inputTwo)
@@ -78,49 +88,52 @@ function TeamVTeam({}: Props) {
                 Get Results
             </Button>
             </div>
-            <div className='flex flex-col space-y-10 w-full '>
+            {
+              !inputOne && !inputTwo ?<div className='flex w-full items-center justify-center mt-10 '><p className='text-xl font-bold'>Enter atleast one team to view data</p></div>:            <div className='flex flex-col space-y-10 w-full '>
 
-            <div className="w-full grid grid-cols-1 gap-4 xl:grid-cols-2">
-            <Card>
-          <CardHeader>
-            <CardTitle>Overall Comparison</CardTitle>
-            <CardDescription>By average</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <RadarC data={p1} />
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader>
-            <CardTitle>Average Runs Per Match</CardTitle>
-            <CardDescription>By each season</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <BarC data={yearlyRuns} />
-          </CardContent>
-        </Card>
-            </div>
-            <div className="w-full grid grid-cols-1 gap-4 xl:grid-cols-2">
-            <Card>
-          <CardHeader>
-            <CardTitle>Team Wins</CardTitle>
-            <CardDescription>By Season</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <BarC data={yearlyWins} />
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader>
-            <CardTitle>Team Wickets</CardTitle>
-            <CardDescription>By each season</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <BarC data={yearlyWickets} />
-          </CardContent>
-        </Card>
-            </div>
-            </div>
+              <div className="w-full grid grid-cols-1 gap-4 xl:grid-cols-2">
+              <Card>
+            <CardHeader>
+              <CardTitle>Overall Comparison</CardTitle>
+              <CardDescription>By average</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <RadarC data={p1} />
+            </CardContent>
+          </Card>
+          <Card>
+            <CardHeader>
+              <CardTitle>Average Runs Per Match</CardTitle>
+              <CardDescription>By each season</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <BarC data={yearlyRuns} />
+            </CardContent>
+          </Card>
+              </div>
+              <div className="w-full grid grid-cols-1 gap-4 xl:grid-cols-2">
+              <Card>
+            <CardHeader>
+              <CardTitle>Team Wins</CardTitle>
+              <CardDescription>By Season</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <BarC data={yearlyWins} />
+            </CardContent>
+          </Card>
+          <Card>
+            <CardHeader>
+              <CardTitle>Team Wickets</CardTitle>
+              <CardDescription>By each season</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <BarC data={yearlyWickets} />
+            </CardContent>
+          </Card>
+              </div>
+              </div>
+            }
+
 
 
         </div>

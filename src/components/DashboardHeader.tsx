@@ -10,7 +10,7 @@ function DashboardHeader({dataM}: any) {
 
       const avgRunsPerSeason = calculateAvgRunsPerSeason(dataM);
   return (
-    <div className='flex flex-col xl:flex-row items-center p-4 md:p-6 w-full xl:w-1/2'>  
+    <div className='flex flex-col xl:flex-row items-center p-4 md:p-6 w-full'>  
         <div className='w-full'>
         <Card>
           <CardHeader>
@@ -18,7 +18,7 @@ function DashboardHeader({dataM}: any) {
             <CardDescription>A detaild analysis of the average runs scored in each season per match</CardDescription>
           </CardHeader>
           <CardContent>
-                  <ResponsiveContainer width="100%" minHeight={400}>
+                  <ResponsiveContainer width="100%" minHeight={450}>
            <AreaChart
           width={500}
           height={400}

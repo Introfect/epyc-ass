@@ -31,3 +31,11 @@ export type PlayerRecord= {
     player1: number;
     player2: number;
   }
+
+  export type TopPlayer= {
+    player_name: string;
+    runs_scored: number;
+    highest_score: number;
+    half_centuries: number;
+    centuries: number;
+  }
