@@ -39,7 +39,7 @@ https://epyc-ass.vercel.app/
 **Client:** NextJS, Typescript, TailwindCSS, Recharts, papaparse; 
 
 ## Flow
- the data from the csv is parsed and stored =, it is then passed in different function in the helpers.ts file to get desired results for the data visualization.
+ the data from the csv is parsed and stored , it is then passed in different function in the helpers.ts file to get desired results for the data visualization.
 
  ## Routing
 ```bash
