@@ -197,7 +197,7 @@ function TeamVTeam({}: Props) {
       <div className=" col-span-3 w-full grid grid-cols-1 gap-4 overflow-y-auto">
         <Card>
           <CardHeader>
-            <CardTitle>Overall Comparison</CardTitle>
+            <CardTitle>Overall a Comparison</CardTitle>
             <CardDescription>By average</CardDescription>
           </CardHeader>
           <CardContent>
