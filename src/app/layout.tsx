@@ -18,7 +18,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body suppressHydrationWarning={true} className={cn('', font.className)}>
+      <body suppressHydrationWarning={true} className={cn('bg-[#4f91cd]', font.className)}>
      
         {children}
         </body>

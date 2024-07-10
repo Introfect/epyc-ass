@@ -38,7 +38,7 @@ export default function Home() {
           </div>
         </div>
         <img
-          src="/4824.jpg"
+          src="/team.png"
           width="1200"
           height="500"
           alt="IPL Hero"

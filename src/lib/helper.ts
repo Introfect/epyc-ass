@@ -1,5 +1,6 @@
-import { MatchType, MetricComparison, TeamPerformance, TeamStats, YearlyMetric } from "@/types/matchesTypes";
+import { MatchType, MetricComparison, TeamInfo, TeamPerformance, TeamStats, YearlyMetric } from "@/types/matchesTypes";
 import { PlayerRecord, TopPlayer } from "@/types/playerTypes";
+import { teamData } from "./constants";
 
 export const normalizeSeason = (season: string) => {
     const newString=String(season)
@@ -162,15 +163,14 @@ export const calculateMetricsComparison = (matches: MatchType[], teamA: string, 
 
   
 
-export const getUniqueTeams = (matches: MatchType[]): string[] => {
+export const getUniqueTeams = (matches: MatchType[]): TeamInfo[] => {
     const teams = new Set<string>();
   
     matches?.forEach(match => {
       teams.add(match.team1);
       teams.add(match.team2);
     });
-  
-    return Array.from(teams);
+    return Array.from(teams).map(teamName=> teamData[teamName]);
   };
 
 export const calculateYearlyAvgRuns = (matches: MatchType[], teamA: string, teamB: string): YearlyMetric[] => {
@@ -208,8 +208,8 @@ export const calculateYearlyAvgRuns = (matches: MatchType[], teamA: string, team
     const teamBStats = yearlyStats[year][teamB];
     return {
       year,
-      teamA: teamAStats.matchesPlayed > 0 ? teamAStats.totalRuns / teamAStats.matchesPlayed : 0,
-      teamB: teamBStats.matchesPlayed > 0 ? teamBStats.totalRuns / teamBStats.matchesPlayed : 0,
+      teamA: teamAStats.matchesPlayed > 0 ? Math.round(teamAStats.totalRuns / teamAStats.matchesPlayed) : 0,
+      teamB: teamBStats.matchesPlayed > 0 ? Math.round(teamBStats.totalRuns / teamBStats.matchesPlayed) : 0,
     };
   });
 };

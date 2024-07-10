@@ -17,7 +17,7 @@ type Props = {}
 function Navbar({}: Props) {
   const pathName=usePathname()
   return (
-<nav className="h-screen overflow-scroll  justify-between flex items-center flex-col  gap-10 py-6 px-4 bg-black">
+<nav className="h-screen overflow-scroll  justify-between flex items-center flex-col  gap-10 py-6 px-4 bg-[#19388A]">
   
 <Link
           className="flex font-bold text-xl flex-row text-white antialiased"
