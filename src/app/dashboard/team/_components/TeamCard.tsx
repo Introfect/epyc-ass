@@ -13,7 +13,7 @@ function TeamCard({data}: any) {
         `linear-gradient(360deg, var(--slate-700), var(--slate-900)`,
     }}
 >
-    <img className=" w-32 h-20 object-contain p-4 " src={data?.logo} alt="logo"/>
+    <img className=" w-32 h-20 object-contain p1" src={data?.logo} alt="logo"/>
     <div className={`hidden xl:flex w-full items-center justify-center leading-normal`}>
         <h5 className="text-md font-semibold tracking-tight text-white antialiased">{data?.name}</h5>
     </div>
