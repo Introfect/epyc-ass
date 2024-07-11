@@ -33,7 +33,6 @@ const Dashboard = () => {
   const tossDecisions = countTossDecisionsPerTeam(matchData);
   const matchWins = calculateTeamStats(matchData);
   const matchSuper = countMatchesAndSuperOvers(matchData);
-  console.log(matchSuper);
   return (
     <main className="flex flex-col h-screen overflow-y-auto rounded">
       <div className="w-full flex flex-col ml-6 justify-center items-center">
@@ -89,7 +88,13 @@ const Dashboard = () => {
                       matchWins.map((item, index) => {
                         return (
                           <tr key={index}>
-                            <td className="whitespace-nowrap px-4 py-4 text-md font-semibold text-gray-300">
+                            <td 
+                            // did not add bg volor according to team becaues of ui bugs 
+                            // style={{
+                            //   backgroundColor:item?.color,
+                           
+                            // }}
+                            className="whitespace-nowrap px-4  text-md font-semibold ">
                               {item.team}
                             </td>
                             <td className="whitespace-nowrap px-4 py-4 text-md text-white">
@@ -121,7 +126,7 @@ const Dashboard = () => {
         <DashboardHeader dataM={matchData} />
       </div>
 
-      <div className=" grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8">
+      <div className=" grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
             <Card className="">
               <CardHeader>
                 <CardTitle>Total Matches</CardTitle>

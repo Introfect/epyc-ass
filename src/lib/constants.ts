@@ -62,7 +62,7 @@ export const menuOptions = [
     },
     "Pune Warriors": {
       name: "Pune Warriors",
-      logo: "/team_logo/pune_warriors.png",
+      logo: "/team_logo/pune.png",
       color: "#00A859"
     },
     "Sunrisers Hyderabad": {

@@ -54,6 +54,7 @@ export type TeamStats= {
   matchesPlayed: number;
   totalRuns: number;
   avgRunsPerMatch: number;
+  color:string
 }
 
 export type TeamInfo= {

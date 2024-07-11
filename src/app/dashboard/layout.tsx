@@ -9,7 +9,7 @@ const Layout = (props: Props) => {
       <Navbar />
       <div className="w-full">
       <div className="flex flex-col gap-4 relative backdrop-blur-lg ">
-      <h1 className="font-bold sticky top-0 p-6 justify-center flex items-center">
+      <h1 className="font-bold sticky top-0 p-6 justify-center flex items-center text-white">
         Dashboard
       </h1>
     </div>

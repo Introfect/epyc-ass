@@ -167,8 +167,11 @@ export const getUniqueTeams = (matches: MatchType[]): TeamInfo[] => {
     const teams = new Set<string>();
   
     matches?.forEach(match => {
-      teams.add(match.team1);
-      teams.add(match.team2);
+      if(match.team1||match.team2!==undefined){
+        
+        teams.add(match.team1);
+        teams.add(match.team2);
+      }
     });
     return Array.from(teams).map(teamName=> teamData[teamName]);
   };
@@ -308,13 +311,17 @@ export const calculateTeamStats = (matches: MatchType[]): TeamStats[] => {
     }
   });
 
-  return Object.entries(teamStats).map(([team, stats]) => ({
+
+
+  return Object.entries(teamStats).map(([team, stats]) => 
+    ({
     team,
     wins: stats.wins,
     losses: stats.losses,
     matchesPlayed: stats.matchesPlayed,
     totalRuns: stats.totalRuns,
     avgRunsPerMatch: stats.matchesPlayed > 0 ? Math.round(stats.totalRuns / stats.matchesPlayed) : 0,
+    color:teamData[team]?.color
   })).sort((a, b) => b.wins - a.wins).slice(0, 5);
 };
 
