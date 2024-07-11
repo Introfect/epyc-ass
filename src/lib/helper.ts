@@ -78,7 +78,7 @@ export const calculateAvgRunsPerSeason = (matches: MatchType[]): { year: number;
       const year = season.includes('/') ? parseInt(season.split('/')[0]) : parseInt(season);
       return {
         year,
-        avgRuns: data.totalRuns / data.matchCount
+        avgRuns: Math.round(data.totalRuns / data.matchCount)
       };
     });
   };
@@ -314,7 +314,7 @@ export const calculateTeamStats = (matches: MatchType[]): TeamStats[] => {
     losses: stats.losses,
     matchesPlayed: stats.matchesPlayed,
     totalRuns: stats.totalRuns,
-    avgRunsPerMatch: stats.matchesPlayed > 0 ? stats.totalRuns / stats.matchesPlayed : 0,
+    avgRunsPerMatch: stats.matchesPlayed > 0 ? Math.round(stats.totalRuns / stats.matchesPlayed) : 0,
   })).sort((a, b) => b.wins - a.wins).slice(0, 5);
 };
 

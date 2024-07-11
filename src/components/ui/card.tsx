@@ -1,5 +1,5 @@
 import * as React from "react"
-
+import {motion} from "framer-motion"
 import { cn } from "@/lib/utils"
 
 const Card = React.forwardRef<
@@ -9,9 +9,13 @@ const Card = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      "rounded-lg bg-card  shadow-2xl text-card-foreground",
+      "rounded-lg bg-card  shadow-2xl text-white   ",
       className
     )}
+    style={{
+      background:
+        "linear-gradient(180deg, var(--slate-800), var(--slate-900)",
+    }}
     {...props}
   />
 ))

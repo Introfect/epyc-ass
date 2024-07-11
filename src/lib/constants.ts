@@ -36,18 +36,18 @@ export const menuOptions = [
       color: "#00A859"
     },
     "Delhi Daredevils": {
-      name: "Delhi Daredevils logo",
-      logo: "/team_logo/pune_warriors.png",
+      name: "Delhi Daredevils",
+      logo: "/team_logo/dd.png",
       color: "#00A859"
     },
     "Rajasthan Royals": {
-      name: "PRajasthan Royals",
+      name: "Rajasthan Royals",
       logo: "/team_logo/rr.png",
       color: "#00A859"
     },
     "Mumbai Indians": {
       name: "Mumbai Indians",
-      logo: "/team_npm run dev.png",
+      logo: "/team_logo/mumbai.png",
       color: "#00A859"
     },
     "Deccan Chargers": {
@@ -82,7 +82,7 @@ export const menuOptions = [
     },
     "Rising Pune Supergiant": {
       name: "Rising Pune Supergiant",
-      logo: "/team_logo/pune_warriors.png",
+      logo: "/team_logo/rps.png",
       color: "#00A859"
     },
     "Delhi Capitals": {

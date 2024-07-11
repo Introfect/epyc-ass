@@ -17,10 +17,10 @@ type Props = {}
 function Navbar({}: Props) {
   const pathName=usePathname()
   return (
-<nav className="h-screen overflow-scroll  justify-between flex items-center flex-col  gap-10 py-6 px-4 bg-[#19388A]">
+<nav className="h-screen overflow-scroll  justify-between flex items-center flex-col  gap-10 py-6 px-4 bg-white">
   
 <Link
-          className="flex font-bold text-xl flex-row text-white antialiased"
+          className="flex font-bold text-xl flex-row text-black antialiased"
           href="/"
         >
           epyc.

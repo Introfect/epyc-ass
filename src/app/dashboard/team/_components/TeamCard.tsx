@@ -5,16 +5,16 @@ import React from 'react'
 type Props = {}
 
 function TeamCard({data}: any) {
+  const col=data?.color;
   return (
-
-<div  className={cn(`flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl]`)}
+<div  className={cn(`h-20 cursor-pointer flex flex-col items-center bg-gradient-to-r from-[${col}] to-black bg-white shadow-xl rounded-lg md:flex-row`)}
 style={{
-  backgroundColor:`${data?.color}`
+  backgroundImage:`linear-gradient(to bottom right, ${data?.color}, #000000)`
 }}
 >
-    <img className="object-contain w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-s-lg" src={data?.logo} alt=""/>
-    <div className="flex flex-col justify-between p-4 leading-normal">
-        <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{data?.name}</h5>
+    <img className=" w-32 h-20 object-contain p-4 " src={data?.logo} alt=""/>
+    <div className={`flex w-full items-center justify-center leading-normal`}>
+        <h5 className="text-xl font-semibold tracking-tight text-white antialiased">{data?.name}</h5>
     </div>
 </div>
 
