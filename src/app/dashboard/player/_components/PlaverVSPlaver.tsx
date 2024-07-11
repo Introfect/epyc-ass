@@ -29,6 +29,8 @@ import { Button } from "@/components/ui/button";
 import { YearlyPlaterMetric } from "@/types/playerTypes";
 import { useToast } from "@/components/ui/use-toast";
 import BarC from "./BarC";
+import TeamCard from "../../team/_components/TeamCard";
+import PlayerCard from "./PlayerCard";
 type Props = {};
 
 function PlaverVSPlaver({}: Props) {
@@ -47,6 +49,28 @@ function PlaverVSPlaver({}: Props) {
   useEffect(() => {
     fetchCsvData("/cricket_data.csv", setPlayerData);
   }, []);
+
+  useEffect(()=>{
+    if (!inputOne || !inputTwo) {
+      toast({
+        variant: "default",
+        title: "SELECT BOTH PLAYERS",
+        description:
+          "Select both players from dropdown to see a detailed analysis of both",
+      });
+    }
+    const btAvg = compareBattingAverage(playerData, inputOne, inputTwo);
+    btAvg && setBattingAvg(btAvg);
+    const runs = compareRunsScored(playerData, inputOne, inputTwo);
+    runs && setRunsScored(runs);
+    const wickets = compareWicketsTaken(playerData, inputOne, inputTwo);
+    wickets && setWicketsTaken(wickets);
+    const strike = compareBattingStrikeRate(playerData, inputOne, inputTwo);
+    strike && setStrikeRate(strike);
+    const topBat = getTopRunScorers(playerData);
+    console.log(topBat);
+
+  },[inputOne,inputTwo])
   const handlePlayer = () => {
     if (!inputOne || !inputTwo) {
       toast({
@@ -64,57 +88,42 @@ function PlaverVSPlaver({}: Props) {
     wickets && setWicketsTaken(wickets);
     const strike = compareBattingStrikeRate(playerData, inputOne, inputTwo);
     strike && setStrikeRate(strike);
-    const topBat=getTopRunScorers(playerData)
-    console.log(topBat)
+    const topBat = getTopRunScorers(playerData);
+    console.log(topBat);
   };
   return (
-    <div className="flex flex-col items-center mt-5 justify-around pb-20">
-      <p className="text-2xl md:tetx-4xl font-bold antialiased">
-        Lets see a Player <span className="text-[#7540A9]">VS</span> Player
-        analysis
+    <div className="w-full pb-20 flex items-center flex-col gap-6">
+      <p className="text-white">
+        Select playes from the list below to see the results 
       </p>
-      <div className="flex flex-col md:flex-row gap-4 my-4">
-        <div>
-          <Select onValueChange={setInputOne}>
-            <SelectTrigger className="w-[200px]">
-              <SelectValue placeholder="Select the first theme" />
-            </SelectTrigger>
-            <SelectContent>
-              {uniquePlayer?.map((item, index) => (
-                <SelectItem key={index} value={item}>
-                  {item}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </div>
-        <div>
-          <Select onValueChange={setInputTwo}>
-            <SelectTrigger className="w-[200px]">
-              <SelectValue
-                className="text-xs"
-                placeholder="Select the second theme"
-              />
-            </SelectTrigger>
-            <SelectContent>
-              {uniquePlayer?.map((item, index) => (
-                <SelectItem key={index} value={item}>
-                  {item}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </div>
-        <Button onClick={handlePlayer} className="bg-[#7540A9]">
-          Get Results
-        </Button>
+      <div className=" mx-auto overflow-x-auto flex items-center max-w-7xl justify-center gap-4">
+        {uniquePlayer?.map((item, index) => {
+          return (
+            <div
+              className={`cursor-pointer`}
+              onClick={() => setInputOne(item)}
+              key={index}
+            >
+              <PlayerCard data={item} />;
+            </div>
+          );
+        })}
       </div>
-      {!inputOne && !inputTwo ? (
-        <div className="mt-10 flex items-center justify-center w-full">
-       <h1 className="font-bold text-xl">Enter atleast one players to view data</h1>
-        </div>
-      ) : (
-        <div className="flex flex-col space-y-10 w-full">
+      <div className=" mx-auto overflow-x-auto flex items-center max-w-7xl justify-center gap-4">
+        {uniquePlayer?.map((item, index) => {
+          console.log(item)
+          return (
+            <div
+              className={`cursor-pointer`}
+              onClick={() => setInputTwo(item)}
+              key={index}
+            >
+              <PlayerCard data={item} />;
+            </div>
+          );
+        })}
+      </div>
+      <div className="flex flex-col space-y-10 w-full">
           <div className="w-full grid grid-cols-1 gap-4 xl:grid-cols-2">
             <Card>
               <CardHeader>
@@ -156,8 +165,99 @@ function PlaverVSPlaver({}: Props) {
             </Card>
           </div>
         </div>
-      )}
+      
+
     </div>
+    // <div className="flex flex-col items-center mt-5 justify-around pb-20">
+    //   <p className="text-2xl md:tetx-4xl font-bold antialiased">
+    //     Lets see a Player <span className="text-[#7540A9]">VS</span> Player
+    //     analysis
+    //   </p>
+    //   <div className="flex flex-col md:flex-row gap-4 my-4">
+    //     <div>
+    //       <Select onValueChange={setInputOne}>
+    //         <SelectTrigger className="w-[200px]">
+    //           <SelectValue placeholder="Select the first theme" />
+    //         </SelectTrigger>
+    //         <SelectContent>
+    //           {uniquePlayer?.map((item, index) => (
+    //             <SelectItem key={index} value={item}>
+    //               {item}
+    //             </SelectItem>
+    //           ))}
+    //         </SelectContent>
+    //       </Select>
+    //     </div>
+    //     <div>
+    //       <Select onValueChange={setInputTwo}>
+    //         <SelectTrigger className="w-[200px]">
+    //           <SelectValue
+    //             className="text-xs"
+    //             placeholder="Select the second theme"
+    //           />
+    //         </SelectTrigger>
+    //         <SelectContent>
+    //           {uniquePlayer?.map((item, index) => (
+    //             <SelectItem key={index} value={item}>
+    //               {item}
+    //             </SelectItem>
+    //           ))}
+    //         </SelectContent>
+    //       </Select>
+    //     </div>
+    //     <Button onClick={handlePlayer} className="bg-[#7540A9]">
+    //       Get Results
+    //     </Button>
+    //   </div>
+    //   {!inputOne && !inputTwo ? (
+    //     <div className="mt-10 flex items-center justify-center w-full">
+    //    <h1 className="font-bold text-xl">Enter atleast one players to view data</h1>
+    //     </div>
+    //   ) : (
+    //     <div className="flex flex-col space-y-10 w-full">
+    //       <div className="w-full grid grid-cols-1 gap-4 xl:grid-cols-2">
+    //         <Card>
+    //           <CardHeader>
+    //             <CardTitle>Batting Average comparison</CardTitle>
+    //             <CardDescription>By average</CardDescription>
+    //           </CardHeader>
+    //           <CardContent>
+    //             <LineC data={battingAvg} />
+    //           </CardContent>
+    //         </Card>
+    //         <Card>
+    //           <CardHeader>
+    //             <CardTitle>Total Runs Scored</CardTitle>
+    //             <CardDescription>By each season</CardDescription>
+    //           </CardHeader>
+    //           <CardContent>
+    //             <BarC data={runsScored} />
+    //           </CardContent>
+    //         </Card>
+    //       </div>
+    //       <div className="w-full grid grid-cols-1 gap-4 lg:grid-cols-2">
+    //         <Card>
+    //           <CardHeader>
+    //             <CardTitle>Total Wickets Taken</CardTitle>
+    //             <CardDescription>By Season</CardDescription>
+    //           </CardHeader>
+    //           <CardContent>
+    //             <BarC data={wicketsTaken} />
+    //           </CardContent>
+    //         </Card>
+    //         <Card>
+    //           <CardHeader>
+    //             <CardTitle>Team Wickets</CardTitle>
+    //             <CardDescription>By each season</CardDescription>
+    //           </CardHeader>
+    //           <CardContent>
+    //             <LineC data={strikeRate} />
+    //           </CardContent>
+    //         </Card>
+    //       </div>
+    //     </div>
+    //   )}
+    // </div>
   );
 }
 

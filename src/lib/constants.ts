@@ -8,9 +8,9 @@ import Workflows from '@/components/icons/workflows'
 import { TeamInfo } from '@/types/matchesTypes'
 
 export const menuOptions = [
-    { name: 'Home', Component: Home, href: '/dashboard' },
-    { name: 'Team', Component: Workflows, href: '/dashboard/team' },
-    { name: 'Plaver', Component: Settings, href: '/dashboard/player' },
+    { name: 'Home', Component: Home, href:'/dashboard' },
+    { name: 'Team', Component: Workflows, href:'/dashboard/team' },
+    { name: 'Plaver', Component: Settings, href:'/dashboard/player' },
   ]
 
 

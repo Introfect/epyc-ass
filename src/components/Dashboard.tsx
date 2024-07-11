@@ -34,9 +34,9 @@ const Dashboard = () => {
   const matchWins = calculateTeamStats(matchData);
   const matchSuper = countMatchesAndSuperOvers(matchData);
   return (
-    <main className="flex flex-col h-screen overflow-y-auto rounded">
+    <main className="flex flex-col h-screen overflow-y-auto rounded pb-20">
       <div className="w-full flex flex-col ml-6 justify-center items-center">
-        <h1 className="text-xl md:text-4xl gap-6 text-white tracking-wide antialiased font-light">
+        <h1 className="text-xl md:text-4xl gap-6 text-white tracking-wide antialiased font-light p-2">
           Welcome to your{" "}
           <span className="font-bold text-[#7540A9]">Dashboard</span>
         </h1>

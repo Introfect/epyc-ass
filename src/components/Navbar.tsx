@@ -11,15 +11,19 @@ import {
 import clsx from "clsx";
 import { menuOptions } from "@/lib/constants";
 import { usePathname } from "next/navigation";
-import { Database, GitBranch, LucideMousePointerClick } from "lucide-react";
 type Props = {};
 
 function Navbar({}: Props) {
   const pathName = usePathname();
   return (
-    <nav className="h-screen overflow-scroll  justify-between flex items-center flex-col  gap-10 py-6 px-4 bg-white">
+    <nav 
+    style={{
+      background:
+        "linear-gradient(180deg, var(--slate-800), var(--slate-900)",
+    }}
+    className="h-screen overflow-scroll justify-between flex items-center flex-col  gap-10 py-6 px-4 bg-white">
       <Link
-        className="flex font-bold text-xl flex-row text-black antialiased"
+        className="flex font-bold text-xl flex-row text-white antialiased"
         href="/"
       >
         epyc.
@@ -36,11 +40,11 @@ function Navbar({}: Props) {
                       className={clsx(
                         "group h-8 w-8 flex items-center justify-center  scale-[1.5] rounded-lg p-[3px]  cursor-pointer",
                         {
-                          "bg-[#EEE0FF]": pathName === menuItem.href,
+                          "bg-[#EEE0FF]": pathName == menuItem.href,
                         }
                       )}
                     >
-                      <menuItem.Component
+                      <menuItem.Component 
                         selected={pathName == menuItem.href}
                       />
                     </Link>

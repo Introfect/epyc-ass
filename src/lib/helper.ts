@@ -349,6 +349,7 @@ export const compareBattingAverage = (records: PlayerRecord[], player1: string, 
   const yearlyStats: { [year: number]: { [player: string]: number } } = {};
 
   records.forEach(record => {
+    console.log(record.player_name)
     const year = record.year;
 
     if (!yearlyStats[year]) {
@@ -363,7 +364,6 @@ export const compareBattingAverage = (records: PlayerRecord[], player1: string, 
       yearlyStats[year][player2] = record.batting_average;
     }
   });
-
   return Object.keys(yearlyStats).map(year => ({
     year: parseInt(year),
     // @ts-expect-error
