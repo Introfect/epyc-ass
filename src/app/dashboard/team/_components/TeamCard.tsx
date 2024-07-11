@@ -10,7 +10,7 @@ function TeamCard({data}: any) {
 <div  className={cn(`h-20 cursor-pointer flex flex-col items-center justify-center bg-gradient-to-r from-[${col}] to-black bg-white shadow-xl rounded-lg md:flex-row`)}
     style={{
       background:
-        `linear-gradient(360deg, var(--slate-700), var(--slate-900)`,
+        `linear-gradient(180deg, ${data?.color}, black`,
     }}
 >
     <img className=" w-32 h-20 object-contain p1" src={data?.logo} alt="logo"/>

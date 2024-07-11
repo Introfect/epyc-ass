@@ -28,37 +28,37 @@ export const menuOptions = [
     "Kings XI Punjab": {
       name: "Kings XI Punjab",
       logo: "/team_logo/punjab.png",
-      color: "#174EA6"
+      color: "#D53811"
     },
     "Chennai Super Kings": {
       name: "Chennai Super Kings",
       logo: "/team_logo/csk.png",
-      color: "#00A859"
+      color: "#F1D402"
     },
     "Delhi Daredevils": {
       name: "Delhi Daredevils",
       logo: "/team_logo/dd.png",
-      color: "#00A859"
+      color: "#F17D02"
     },
     "Rajasthan Royals": {
       name: "Rajasthan Royals",
       logo: "/team_logo/rr.png",
-      color: "#00A859"
+      color: "#E72A8E"
     },
     "Mumbai Indians": {
       name: "Mumbai Indians",
       logo: "/team_logo/mumbai.png",
-      color: "#00A859"
+      color: "#1E4EBD"
     },
     "Deccan Chargers": {
       name: "Deccan Chargers",
       logo: "/team_logo/deccan.png",
-      color: "#00A859"
+      color: "#F1F1F1"
     },
     "Kochi Tuskers Kerala": {
       name: "Kochi Tuskers Kerala",
       logo: "/team_logo/kochi.png",
-      color: "#00A859"
+      color: "#B363DE"
     },
     "Pune Warriors": {
       name: "Pune Warriors",
@@ -68,46 +68,36 @@ export const menuOptions = [
     "Sunrisers Hyderabad": {
       name: "Sunrisers Hyderabad",
       logo: "/team_logo/srh.png",
-      color: "#00A859"
-    },
-    "Rising Pune Supergiants": {
-      name: "Rising Pune Supergiants",
-      logo: "/team_logo/rps.png",
-      color: "#00A859"
+      color: "#FD3B0F"
     },
     "Gujarat Lions": {
       name: "Gujarat Lions",
       logo: "/team_logo/gujl.png",
-      color: "#00A859"
+      color: "#C2B704"
     },
     "Rising Pune Supergiant": {
       name: "Rising Pune Supergiant",
       logo: "/team_logo/rps.png",
-      color: "#00A859"
+      color: "#76090C"
     },
     "Delhi Capitals": {
       name: "Delhi Capitals",
       logo: "/team_logo/dc.png",
-      color: "#00A859"
+      color: "#4C47F8"
     },
     "Punjab Kings": {
       name: "Punjab Kings",
       logo: "/team_logo/punjab.png",
-      color: "#00A859"
+      color: "#FF3A00"
     },
     "Lucknow Super Giants": {
       name: "Lucknow Super Giants",
       logo: "/team_logo/lucksupg.png",
-      color: "#00A859"
+      color: "#3235EC"
     },
     "Gujarat Titans": {
       name: "Gujarat Titans",
       logo: "/team_logo/gt.png",
-      color: "#00A859"
-    },
-    "Royal Challengers Bengaluru": {
-      name: "Royal Challengers Bengaluru",
-      logo: "/team_logo/rcb.png",
-      color: "#00A859"
+      color: "#4235C4"
     },
   };
