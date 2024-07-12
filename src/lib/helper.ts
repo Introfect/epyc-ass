@@ -352,13 +352,8 @@ data.forEach((del:any)=>{
   if(del.is_wicket==1){
     totalWickets +=1;
   }
-
-
-
 })
-
 return totalWickets
-
 }
 
 

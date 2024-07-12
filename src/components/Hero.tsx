@@ -35,7 +35,7 @@ function Hero({}: Props) {
             <br />
             IPL Experience
           </motion.p>
-          <motion.p className="text-gray-300 md:text-lg">
+          <motion.p className="text-gray-300 text-center md:text-lg">
             Dive deep into the world of the Indian Premier League with our
             comprehensive dashboard.
           </motion.p>
