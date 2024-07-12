@@ -5,9 +5,10 @@ import React from 'react'
 type Props = {}
 
 function TeamCard({data}: any) {
-  const col=data?.color;
+  const col=`from-[${data?.color}]`
+  console.log(col,"color")
   return (
-<div  className={cn(`h-20 cursor-pointer flex flex-col items-center justify-center bg-gradient-to-r from-[${col}] to-black bg-white shadow-xl rounded-lg md:flex-row`)}
+<div  className={cn(`h-20 cursor-pointer flex flex-col items-center justify-center shadow-xl rounded-lg md:flex-row`)}
     style={{
       background:
         `linear-gradient(180deg, ${data?.color}, black`,

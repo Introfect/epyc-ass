@@ -1,19 +1,5 @@
 "use client";
-import useFetch from "@/lib/MatchData";
-import {
-  MatchType,
-  MetricComparison,
-  TeamPerformance,
-  YearlyMetric,
-} from "@/types/matchesTypes";
 import React, { useEffect, useState } from "react";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import {
   calculateAvgRunsPerSeason,
   calculateMetricsComparison,
@@ -36,33 +22,11 @@ import { useToast } from "@/components/ui/use-toast";
 import TeamCard from "./TeamCard";
 type Props = {};
 
-function TeamVTeam({}: Props) {
-  const { toast } = useToast();
+function TeamVTeam({matchData}: any) {
   const [inputOne, setInputOne] = useState("");
   const [inputTwo, setInputTwo] = useState("");
-  const [p1, setP1] = useState<MetricComparison[]>([]);
-  const [matchData, setMatchData] = useState<MatchType[]>([]);
-  const [yearlyRuns, setYearlyRuns] = useState<YearlyMetric[]>([]);
-  const [yearlyWins, setYearlyWins] = useState<YearlyMetric[]>([]);
-  const [yearlyWickets, setYearlyWickets] = useState<YearlyMetric[]>([]);
-  const [deliveriesData, setDeliveriesData] = useState<any[]>([]);
-  const { fetchCsvData } = useFetch();
-
-  useEffect(() => {
-    fetchCsvData("/matches.csv", setMatchData);
-    // fetchCsvData('/deliveries.csv', setDeliveriesData)
-  }, []);
   const uniqueTeams = getUniqueTeams(matchData);
 
-  const handleTeam = () => {
-    if (!inputOne || !inputTwo) {
-      toast({
-        variant: "default",
-        title: "SELECT BOTH PLAYERS",
-        description:
-          "Select both players from dropdown to see a detailed analysis of both",
-      });
-    }
     const TeamOnePerformance = calculateMetricsComparison(
       matchData,
       inputOne,
@@ -71,40 +35,13 @@ function TeamVTeam({}: Props) {
     const avgRuns = calculateYearlyAvgRuns(matchData, inputOne, inputTwo);
     const yW = calculateYearlyWins(matchData, inputOne, inputTwo);
     const yearlyWic = calculateYearlyWickets(matchData, inputOne, inputTwo);
-    avgRuns && setYearlyRuns(avgRuns);
-    TeamOnePerformance && setP1(TeamOnePerformance);
-    yW && setYearlyWins(yW);
-    yearlyWic && setYearlyWickets(yearlyWic);
-  };
-  useEffect(() => {
-    if (!inputOne || !inputTwo) {
-      toast({
-        variant: "default",
-        title: "SELECT BOTH PLAYERS",
-        description:
-          "Select both players from dropdown to see a detailed analysis of both",
-      });
-    }
-    const TeamOnePerformance = calculateMetricsComparison(
-      matchData,
-      inputOne,
-      inputTwo
-    );
-    const avgRuns = calculateYearlyAvgRuns(matchData, inputOne, inputTwo);
-    const yW = calculateYearlyWins(matchData, inputOne, inputTwo);
-    const yearlyWic = calculateYearlyWickets(matchData, inputOne, inputTwo);
-    avgRuns && setYearlyRuns(avgRuns);
-    TeamOnePerformance && setP1(TeamOnePerformance);
-    yW && setYearlyWins(yW);
-    yearlyWic && setYearlyWickets(yearlyWic);
-  }, [inputOne, inputTwo]);
+  
   return (
     <div className="w-full h-full pb-20 grid grid-cols-5 gap-6">
       <div className="overflow-y-auto col-span-1">
         {uniqueTeams?.map((item, index) => {
           return (
             <div
-              className={`cursor-pointer`}
               onClick={() => setInputOne(item?.name)}
               key={index}
             >
@@ -120,7 +57,7 @@ function TeamVTeam({}: Props) {
             <CardDescription>By average</CardDescription>
           </CardHeader>
           <CardContent>
-            <RadarC data={p1} />
+            <RadarC data={TeamOnePerformance} />
           </CardContent>
         </Card>
         <Card>
@@ -129,10 +66,9 @@ function TeamVTeam({}: Props) {
             <CardDescription>By each season</CardDescription>
           </CardHeader>
           <CardContent>
-            <BarC data={yearlyRuns} />
+            <BarC data={avgRuns} />
           </CardContent>
         </Card>
-        {/* hb */}
 
         <Card>
           <CardHeader>
@@ -140,7 +76,7 @@ function TeamVTeam({}: Props) {
             <CardDescription>By Season</CardDescription>
           </CardHeader>
           <CardContent>
-            <BarC data={yearlyWins} />
+            <BarC data={yW} />
           </CardContent>
         </Card>
         <Card>
@@ -149,7 +85,7 @@ function TeamVTeam({}: Props) {
             <CardDescription>By each season</CardDescription>
           </CardHeader>
           <CardContent>
-            <BarC data={yearlyWickets} />
+            <BarC data={yearlyWic} />
           </CardContent>
         </Card>
       </div>

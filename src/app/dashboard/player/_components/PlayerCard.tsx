@@ -12,7 +12,8 @@ function PlayerCard({data}: any) {
     className='text-white flex justify-center w-56 py-1 rounded'>
         <p>
         {data}
-        </p></div>
+        </p>
+        </div>
   )
 }
 

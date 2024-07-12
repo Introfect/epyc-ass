@@ -1,9 +1,5 @@
-"use client";
-import { useEffect, useState } from "react";
-import useFetch from "@/lib/MatchData";
-import { MatchType, MatchesPerSeason } from "@/types/matchesTypes";
+"use client"
 import BarCharts from "./charts/BarChart";
-import {motion} from "framer-motion"
 import {
   Card,
   CardContent,
@@ -22,16 +18,7 @@ import {
   totalWicketCount,
 } from "@/lib/helper";
 
-const Dashboard = () => {
-  const [matchData, setMatchData] = useState<MatchType[]>([]);
-  const [deliveriesData, setDeliveriesData] = useState<any[]>([]);
-  const { fetchCsvData } = useFetch();
-
-  useEffect(() => {
-    fetchCsvData("/matches.csv", setMatchData);
-    fetchCsvData("/deliveries.csv", setDeliveriesData);
-  }, []);
-  console.log(deliveriesData)
+const Dashboard = ({matchData,deliveriesData}:any) => {
   const seasonCount = countMatchesPerSeason(matchData);
   const tossDecisions = countTossDecisionsPerTeam(matchData);
   const matchWins = calculateTeamStats(matchData);
@@ -54,18 +41,7 @@ const Dashboard = () => {
               <CardDescription>By each season</CardDescription>
             </CardHeader>
             <CardContent>
-              <motion.div 
-                initial={{
-                  opacity:0,
-                  x:"-100%"
-                }}
-                animate={{
-                  opacity:100,
-                  x:0
-                }}
-                transition={{
-                  duration:0.5
-                }}
+              <div 
               className="overflow-auto w-full px-4">
                 <table className="min-w-full bg-transparent text-sm">
                   <thead className="text-left">
@@ -125,7 +101,7 @@ const Dashboard = () => {
                       })}
                   </tbody>
                 </table>
-              </motion.div>
+              </div>
             </CardContent>
           </Card>
         </div>
