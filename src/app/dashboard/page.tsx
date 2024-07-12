@@ -4,10 +4,10 @@ import useFetch from "@/lib/MatchData";
 export default async function Home() {
   const {fetchCsvData}=useFetch()
   const matchData= await fetchCsvData('https://epyc-ass.vercel.app/matches.csv')
-  const deliveriesData=await fetchCsvData('https://epyc-ass.vercel.app/deliveries.csv')
+  // const deliveriesData=await fetchCsvData('https://epyc-ass.vercel.app/deliveries.csv')
   return (
 <main className="px-4 py-2">
-  <Dashboard matchData={matchData} deliveriesData={deliveriesData}/>
+  <Dashboard matchData={matchData}/>
 </main>
   );
 }

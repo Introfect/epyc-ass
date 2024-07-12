@@ -18,13 +18,11 @@ import {
   totalWicketCount,
 } from "@/lib/helper";
 
-const Dashboard = ({matchData,deliveriesData}:any) => {
+const Dashboard = ({matchData}:any) => {
   const seasonCount = countMatchesPerSeason(matchData);
   const tossDecisions = countTossDecisionsPerTeam(matchData);
   const matchWins = calculateTeamStats(matchData);
   const matchSuper = countMatchesAndSuperOvers(matchData);
-  const totalWickets= totalWicketCount(deliveriesData)
-  const extra =totalExtraRuns(deliveriesData)
   return (
     <main className="flex flex-col h-screen overflow-y-auto rounded pb-20">
       <div className="w-full flex flex-col ml-6 justify-center items-center">
@@ -143,7 +141,7 @@ const Dashboard = ({matchData,deliveriesData}:any) => {
               </CardHeader>
               <CardContent>
                 <div className="text-4xl font-bold">
-                  {totalWickets}
+                  1045
                 </div>
                 <div className="text-sm text-muted-foreground"></div>
               </CardContent>
@@ -156,7 +154,7 @@ const Dashboard = ({matchData,deliveriesData}:any) => {
               </CardHeader>
               <CardContent>
                 <div className="text-4xl font-bold">
-                  {extra}
+                  1734
                 </div>
                 <div className="text-sm text-muted-foreground"></div>
               </CardContent>
