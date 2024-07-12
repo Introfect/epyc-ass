@@ -6,10 +6,8 @@ import {
   CardDescription,
   CardContent,
 } from "@/components/ui/card";
-import useFetch from "@/lib/MatchData";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import LineC from "./LineC";
-import RadarC from "../../team/_components/RadarC";
 import {
   compareBattingAverage,
   compareBattingStrikeRate,
@@ -18,25 +16,12 @@ import {
   getTopRunScorers,
   getUniquePlayerNames,
 } from "@/lib/helper";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { Button } from "@/components/ui/button";
-import { YearlyPlaterMetric } from "@/types/playerTypes";
-import { useToast } from "@/components/ui/use-toast";
 import BarC from "./BarC";
-import TeamCard from "../../team/_components/TeamCard";
 import PlayerCard from "./PlayerCard";
 type Props = {};
 
 function PlaverVSPlaver({ playerData }: any) {
-  const { toast } = useToast();
 
-  const { fetchCsvData } = useFetch();
   const [inputOne, setInputOne] = useState("");
   const [inputTwo, setInputTwo] = useState("");
   const uniquePlayer = getUniquePlayerNames(playerData);

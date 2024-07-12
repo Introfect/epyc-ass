@@ -5,8 +5,6 @@ import React from 'react'
 type Props = {}
 
 function TeamCard({data}: any) {
-  const col=`from-[${data?.color}]`
-  console.log(col,"color")
   return (
 <div  className={cn(`h-20 cursor-pointer flex flex-col items-center justify-center shadow-xl rounded-lg md:flex-row`)}
     style={{

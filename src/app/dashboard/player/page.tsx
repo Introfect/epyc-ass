@@ -9,7 +9,7 @@ export default async function Page({}: Props) {
   const playerData= await fetchCsvData('https://epyc-ass.vercel.app/cricket_data.csv')
   return (
     <div className='w-full h-screen overflow-auto px-4 py-2'>
-      <PlaverVSPlaver/>
+      <PlaverVSPlaver playerData={playerData}/>
     </div>
   )
 }
