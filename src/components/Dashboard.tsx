@@ -18,6 +18,8 @@ import {
   countMatchesAndSuperOvers,
   countMatchesPerSeason,
   countTossDecisionsPerTeam,
+  totalExtraRuns,
+  totalWicketCount,
 } from "@/lib/helper";
 
 const Dashboard = () => {
@@ -29,10 +31,13 @@ const Dashboard = () => {
     fetchCsvData("/matches.csv", setMatchData);
     fetchCsvData("/deliveries.csv", setDeliveriesData);
   }, []);
+  console.log(deliveriesData)
   const seasonCount = countMatchesPerSeason(matchData);
   const tossDecisions = countTossDecisionsPerTeam(matchData);
   const matchWins = calculateTeamStats(matchData);
   const matchSuper = countMatchesAndSuperOvers(matchData);
+  const totalWickets= totalWicketCount(deliveriesData)
+  const extra =totalExtraRuns(deliveriesData)
   return (
     <main className="flex flex-col h-screen overflow-y-auto rounded pb-20">
       <div className="w-full flex flex-col ml-6 justify-center items-center">
@@ -65,7 +70,7 @@ const Dashboard = () => {
                 <table className="min-w-full bg-transparent text-sm">
                   <thead className="text-left">
                     <tr>
-                      <th className="whitespace-nowrap px-4 py-2 font-medium text-gray-100">
+                      <th className="whitespace-nowrap px-6 py-2 font-medium text-gray-100">
                         Team
                       </th>
                       <th className="whitespace-nowrap px-4 py-2 font-medium text-gray-100">
@@ -89,13 +94,14 @@ const Dashboard = () => {
                         return (
                           <tr key={index}>
                             <td 
-                            // did not add bg volor according to team becaues of ui bugs 
-                            // style={{
-                            //   backgroundColor:item?.color,
-                           
-                            // }}
-                            className="whitespace-nowrap px-4  text-md font-semibold ">
-                              {item.team}
+                            className="whitespace-nowrap px-4  text-md font-semibold flex items-center">
+                              <div
+                                      style={{
+                                        backgroundColor:item?.color,
+                                     
+                                      }}
+                              className="w-2 h-2  rounded-full bg-green-500 mx-2"
+                              />{item.team}
                             </td>
                             <td className="whitespace-nowrap px-4 py-4 text-md text-white">
                               <span className="bg-emerald-500/30 px-2 rounded-full">
@@ -155,12 +161,12 @@ const Dashboard = () => {
 
             <Card className="">
               <CardHeader>
-                <CardTitle>Total Matches</CardTitle>
+                <CardTitle>Total Wickets</CardTitle>
                 <CardDescription>Since 2008</CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="text-4xl font-bold">
-                  {matchSuper.totalMatches}
+                  {totalWickets}
                 </div>
                 <div className="text-sm text-muted-foreground"></div>
               </CardContent>
@@ -168,12 +174,12 @@ const Dashboard = () => {
 
             <Card className="">
               <CardHeader>
-                <CardTitle>Total Super Overs</CardTitle>
+                <CardTitle>Total Extra Runs</CardTitle>
                 <CardDescription>Since 2008</CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="text-4xl font-bold">
-                  {matchSuper.superOvers}
+                  {extra}
                 </div>
                 <div className="text-sm text-muted-foreground"></div>
               </CardContent>

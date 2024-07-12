@@ -343,6 +343,38 @@ export const countMatchesAndSuperOvers = (matches: MatchType[]) => {
   };
 };
 
+
+
+
+export const totalWicketCount=(data:any)=>{
+let totalWickets=0
+data.forEach((del:any)=>{
+  if(del.is_wicket==1){
+    totalWickets +=1;
+  }
+
+
+
+})
+
+return totalWickets
+
+}
+
+
+export const totalExtraRuns=(data:any)=>{
+  let extras=0;
+
+  data.forEach((e:any)=>{
+    if(typeof(e.extra_runs)=='number'){
+
+      extras+=e.extra_runs;
+    }
+  })
+
+  return extras
+}
+
 // Player analysis
 
 export const compareBattingAverage = (records: PlayerRecord[], player1: string, player2: string): { year: number, player1: number, player2: number }[] => {
