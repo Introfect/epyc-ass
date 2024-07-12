@@ -4,7 +4,7 @@ import useFetch from '@/lib/MatchData'
 
 type Props = {}
 
-export default async function Page({}: Props) {
+export default async function page({}: Props) {
   const {fetchCsvData}=useFetch()
   const playerData= await fetchCsvData('https://epyc-ass.vercel.app/cricket_data.csv')
   return (
