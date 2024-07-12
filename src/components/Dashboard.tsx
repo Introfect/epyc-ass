@@ -94,14 +94,15 @@ const Dashboard = () => {
                         return (
                           <tr key={index}>
                             <td 
-                            className="whitespace-nowrap px-4  text-md font-semibold flex items-center">
-                              <div
+                            className="whitespace-nowrap px-4  text-md font-semibold">
+                   
+                         <div className="flex items-center">           <div
                                       style={{
                                         backgroundColor:item?.color,
                                      
                                       }}
                               className="w-2 h-2  rounded-full bg-green-500 mx-2"
-                              />{item.team}
+                              />{item.team}</div> 
                             </td>
                             <td className="whitespace-nowrap px-4 py-4 text-md text-white">
                               <span className="bg-emerald-500/30 px-2 rounded-full">
